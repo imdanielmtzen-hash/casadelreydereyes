@@ -1,0 +1,1243 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iglesia Casa del Rey de Reyes</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Montserrat", sans-serif;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header */
+      .header {
+        background:
+          linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+          url("https://images.unsplash.com/photo-1478147427282-58a87a120781?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+            center/cover no-repeat;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        color: white;
+        position: relative;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        background: rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        transition: all 0.3s;
+      }
+
+      .navbar.scrolled {
+        background: rgba(0, 0, 0, 0.9);
+        padding: 15px 50px;
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        text-decoration: none;
+      }
+
+      .logo-img {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        object-fit: contain; /* Cambiado de cover a contain para que se vea completo */
+        border: 3px solid #d4af37;
+        transition: transform 0.3s;
+        background: white; /* Fondo blanco por si el logo tiene transparencia */
+      }
+
+      /* Logo de respaldo si no carga la imagen */
+      .logo-fallback {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 3px solid #d4af37;
+        background: linear-gradient(135deg, #d4af37, #b8960f);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-family: "Playfair Display", serif;
+        font-size: 24px;
+        font-weight: 700;
+      }
+
+      .logo-container:hover .logo-img {
+        transform: scale(1.1);
+      }
+
+      .logo-text {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .logo-title {
+        font-family: "Playfair Display", serif;
+        font-size: 20px;
+        font-weight: 700;
+        color: #d4af37;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        line-height: 1.2;
+      }
+
+      .logo-subtitle {
+        font-size: 10px;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        font-weight: 300;
+      }
+
+      .nav-menu {
+        display: flex;
+        list-style: none;
+        gap: 40px;
+        align-items: center;
+      }
+
+      .nav-menu a {
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: color 0.3s;
+        position: relative;
+      }
+
+      .nav-menu a::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: #d4af37;
+        transition: width 0.3s;
+      }
+
+      .nav-menu a:hover {
+        color: #d4af37;
+      }
+
+      .nav-menu a:hover::after {
+        width: 100%;
+      }
+
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        font-size: 24px;
+        color: white;
+        z-index: 1001;
+      }
+
+      .hero-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 0 20px;
+        margin-top: 80px;
+      }
+
+      .hero-content h1 {
+        font-family: "Playfair Display", serif;
+        font-size: 64px;
+        font-weight: 900;
+        margin-bottom: 20px;
+        letter-spacing: 3px;
+      }
+
+      .hero-content h1 span {
+        color: #d4af37;
+      }
+
+      .hero-content p {
+        font-size: 20px;
+        font-weight: 300;
+        margin-bottom: 30px;
+        max-width: 700px;
+      }
+
+      .btn-gold {
+        display: inline-block;
+        padding: 15px 40px;
+        background: #d4af37;
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: all 0.3s;
+        border: 2px solid #d4af37;
+      }
+
+      .btn-gold:hover {
+        background: transparent;
+        color: #d4af37;
+      }
+
+      .btn-outline {
+        display: inline-block;
+        padding: 15px 40px;
+        background: transparent;
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border: 2px solid white;
+        transition: all 0.3s;
+        margin-left: 20px;
+      }
+
+      .btn-outline:hover {
+        background: white;
+        color: #333;
+      }
+
+      /* Resto de estilos... */
+      .welcome {
+        padding: 100px 0;
+        background: #f9f9f9;
+      }
+
+      .welcome-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: center;
+      }
+
+      .welcome-image img {
+        width: 100%;
+        border-radius: 10px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .welcome-text h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 42px;
+        color: #1a1a1a;
+        margin-bottom: 20px;
+      }
+
+      .welcome-text h2 span {
+        color: #d4af37;
+      }
+
+      .welcome-text .subtitle {
+        color: #d4af37;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 20px;
+        font-size: 14px;
+      }
+
+      .welcome-text p {
+        font-size: 16px;
+        line-height: 1.8;
+        margin-bottom: 30px;
+        color: #666;
+      }
+
+      .services {
+        padding: 100px 0;
+        background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+        color: white;
+        text-align: center;
+      }
+
+      .section-title {
+        font-family: "Playfair Display", serif;
+        font-size: 42px;
+        margin-bottom: 15px;
+        color: #d4af37;
+      }
+
+      .section-subtitle {
+        font-size: 16px;
+        color: #999;
+        margin-bottom: 60px;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+      }
+
+      .service-card {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 40px 30px;
+        border-radius: 10px;
+        transition: transform 0.3s;
+        border: 1px solid rgba(212, 175, 55, 0.3);
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        background: rgba(212, 175, 55, 0.1);
+      }
+
+      .service-card i {
+        font-size: 48px;
+        color: #d4af37;
+        margin-bottom: 20px;
+      }
+
+      .service-card h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 24px;
+        margin-bottom: 15px;
+        color: #d4af37;
+      }
+
+      .service-card p {
+        font-size: 16px;
+        color: #ccc;
+        line-height: 1.8;
+      }
+
+      .ministries {
+        padding: 100px 0;
+        background: white;
+      }
+
+      .ministries-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-top: 60px;
+      }
+
+      .ministry-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: 10px;
+        height: 400px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .ministry-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s;
+      }
+
+      .ministry-card:hover img {
+        transform: scale(1.1);
+      }
+
+      .ministry-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+        padding: 40px 30px;
+        color: white;
+        transition: all 0.3s;
+      }
+
+      .ministry-card:hover .ministry-overlay {
+        padding-bottom: 60px;
+      }
+
+      .ministry-overlay h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: #d4af37;
+      }
+
+      .ministry-overlay p {
+        font-size: 14px;
+        opacity: 0.9;
+      }
+
+      .events {
+        padding: 100px 0;
+        background: #f9f9f9;
+      }
+
+      .events-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        margin-top: 60px;
+      }
+
+      .event-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        display: flex;
+        transition: transform 0.3s;
+      }
+
+      .event-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .event-date {
+        background: #d4af37;
+        color: white;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-width: 100px;
+        font-weight: 700;
+      }
+
+      .event-date .day {
+        font-size: 32px;
+        line-height: 1;
+      }
+
+      .event-date .month {
+        font-size: 14px;
+        text-transform: uppercase;
+      }
+
+      .event-info {
+        padding: 25px;
+        flex: 1;
+      }
+
+      .event-info h3 {
+        font-family: "Playfair Display", serif;
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #1a1a1a;
+      }
+
+      .event-info p {
+        color: #666;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .event-info .time {
+        color: #d4af37;
+        font-weight: 600;
+        margin-top: 10px;
+      }
+
+      .contact {
+        padding: 100px 0;
+        background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+        color: white;
+      }
+
+      .contact-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 60px;
+      }
+
+      .contact-info h2 {
+        font-family: "Playfair Display", serif;
+        font-size: 42px;
+        margin-bottom: 30px;
+        color: #d4af37;
+      }
+
+      .contact-info p {
+        margin-bottom: 30px;
+        color: #ccc;
+        line-height: 1.8;
+      }
+
+      .contact-detail {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .contact-detail i {
+        color: #d4af37;
+        font-size: 20px;
+        margin-right: 15px;
+        width: 30px;
+      }
+
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 5px;
+        color: white;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .contact-form textarea {
+        height: 150px;
+        resize: vertical;
+      }
+
+      .contact-form input:focus,
+      .contact-form textarea:focus {
+        outline: none;
+        border-color: #d4af37;
+      }
+
+      .contact-form button {
+        background: #d4af37;
+        color: white;
+        padding: 15px 40px;
+        border: none;
+        border-radius: 50px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .contact-form button:hover {
+        background: #b8960f;
+      }
+
+      .footer {
+        background: #111;
+        color: #999;
+        padding: 40px 0;
+        text-align: center;
+      }
+
+      .footer .social-links {
+        margin-bottom: 20px;
+      }
+
+      .footer .social-links a {
+        color: #d4af37;
+        margin: 0 15px;
+        font-size: 24px;
+        transition: color 0.3s;
+      }
+
+      .footer .social-links a:hover {
+        color: white;
+      }
+
+      .footer p {
+        font-size: 14px;
+      }
+
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 15px 20px;
+        }
+
+        .navbar.scrolled {
+          padding: 10px 20px;
+        }
+
+        .logo-img {
+          width: 45px;
+          height: 45px;
+        }
+
+        .logo-fallback {
+          width: 45px;
+          height: 45px;
+          font-size: 18px;
+        }
+
+        .logo-title {
+          font-size: 16px;
+        }
+
+        .logo-subtitle {
+          font-size: 8px;
+        }
+
+        .nav-menu {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: rgba(0, 0, 0, 0.95);
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          padding: 30px;
+          gap: 30px;
+        }
+
+        .nav-menu.active {
+          display: flex;
+        }
+
+        .nav-menu a {
+          font-size: 18px;
+        }
+
+        .hamburger {
+          display: block;
+        }
+
+        .hero-content h1 {
+          font-size: 42px;
+        }
+
+        .hero-content p {
+          font-size: 16px;
+        }
+
+        .btn-outline {
+          margin-left: 0;
+          margin-top: 15px;
+        }
+
+        .welcome-grid {
+          grid-template-columns: 1fr;
+          gap: 30px;
+        }
+
+        .welcome-text h2 {
+          font-size: 32px;
+        }
+
+        .section-title {
+          font-size: 32px;
+        }
+
+        .event-card {
+          flex-direction: column;
+        }
+
+        .event-date {
+          flex-direction: row;
+          gap: 10px;
+          padding: 15px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <nav class="navbar" id="navbar">
+        <a href="#" class="logo-container">
+          <!-- OPCIÓN 1: Logo con imagen (cambia la ruta según corresponda) -->
+          <!-- 
+                POSIBLES RUTAS PARA TU LOGO:
+                
+                Si tu archivo se llama "logo.png" y está en la misma carpeta:
+                src="logo.png"
+                
+                Si está en una subcarpeta llamada "img":
+                src="img/logo.png"
+                
+                Si está en una subcarpeta llamada "images":
+                src="images/logo.png"
+                
+                Si tiene otro nombre:
+                src="nombre-de-tu-archivo.png"
+                
+                Formatos aceptados: .png, .jpg, .jpeg, .gif, .svg, .webp
+                -->
+
+          <!-- INTENTA PRIMERO CON ESTA OPCIÓN (logo en misma carpeta) -->
+          <img
+            src="images/logo_blanco.png"
+            alt="Logo Iglesia Casa del Rey de Reyes"
+            class="logo-img"
+            onerror="
+              this.style.display = 'none';
+              this.nextElementSibling.style.display = 'flex';
+            "
+            onload="this.style.display = 'block'"
+          />
+
+          <!-- Logo de respaldo (se muestra si la imagen no carga) -->
+          <div class="logo-fallback" style="display: none">CR</div>
+
+          <!-- 
+                SI EL LOGO NO APARECE, PRUEBA ESTAS OPCIONES:
+                
+                Opción 2 - Ruta absoluta desde la raíz:
+                <img src="/logo.png" alt="Logo" class="logo-img">
+                
+                Opción 3 - Usar una imagen de prueba para verificar que funciona:
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Cross_with_crown_of_thorns.svg/1200px-Cross_with_crown_of_thorns.svg.png" alt="Logo" class="logo-img">
+                
+                Opción 4 - Si tu logo está en Google Drive o similar:
+                <img src="URL_COMPARTIDA_DE_TU_IMAGEN" alt="Logo" class="logo-img">
+                -->
+
+          <div class="logo-text">
+            <span class="logo-title">Casa del Rey</span>
+            <span class="logo-subtitle">Iglesia Cristiana</span>
+          </div>
+        </a>
+
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="#inicio">Inicio</a></li>
+          <li><a href="#nosotros">Nosotros</a></li>
+          <li><a href="#cultos">Cultos</a></li>
+          <li><a href="#ministerios">Ministerios</a></li>
+          <li><a href="#eventos">Eventos</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+
+        <div class="hamburger" id="hamburger">
+          <i class="fas fa-bars"></i>
+        </div>
+      </nav>
+
+      <div class="hero-content" id="inicio">
+        <p>BIENVENIDOS A</p>
+        <h1>IGLESIA CASA DEL <span>REY DE REYES</span></h1>
+        <p>
+          Un lugar donde encontraras amor, fe y esperanza. Somos una familia que
+          crece junta en la presencia de Dios.
+        </p>
+        <div>
+          <a href="#contacto" class="btn-gold">Conócenos</a>
+          <a href="#cultos" class="btn-outline">Horarios</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sección Bienvenida -->
+    <section class="welcome" id="nosotros">
+      <div class="container">
+        <div class="welcome-grid">
+          <div class="welcome-image">
+            <img src="images/vision.jpg" alt="Iglesia Casa del Rey de Reyes" />
+          </div>
+          <div class="welcome-text">
+            <p class="subtitle">ACERCA DE NOSOTROS</p>
+            <h2>Bienvenidos a la <span>Casa del Rey de Reyes</span></h2>
+            <p>
+              "Un lugar donde cada persona es bienvenida, cada vida tiene
+              propósito y cada corazón puede encontrarse con Jesús."
+            </p>
+            <p>
+              "Nuestra visión es formar discípulos de Cristo que transformen
+              familias, impacten comunidades y lleven el Reino de Dios al
+              mundo."
+            </p>
+            <a href="#contacto" class="btn-gold">Más Información</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección Cultos -->
+    <section class="services" id="cultos">
+      <div class="container">
+        <h2 class="section-title">Nuestros Cultos</h2>
+        <p class="section-subtitle">TIEMPOS DE ADORACIÓN Y COMUNIÓN</p>
+        <div class="services-grid">
+          <div class="service-card">
+            <i class="fas fa-sun"></i>
+            <h3>Domingo</h3>
+            <p><strong>Escuela Dominicalr</strong></p>
+            <p>11:00 AM</p>
+            <p>Enseñanza de la palabra de Dios</p>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-sun"></i>
+            <h3>Domingo</h3>
+            <p><strong>Servicio Familiar</strong></p>
+            <p>12:00 PM</p>
+            <p>Adoración, Palabra y Comunión</p>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-pray"></i>
+            <h3>Martes</h3>
+            <p><strong>Servicio General</strong></p>
+            <p>6:30 PM</p>
+            <p>Noche de Palabra y Clamor</p>
+          </div>
+          <div class="service-card">
+            <i class="fas fa-bible"></i>
+            <h3>Viernes</h3>
+            <p><strong>Servicio de Oración</strong></p>
+            <p>6:30 PM</p>
+            <p>Profundizando en el clamor</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección Ministerios -->
+    <section class="ministries" id="ministerios">
+      <div class="container">
+        <h2 class="section-title" style="text-align: center; color: #1a1a1a">
+          Nuestros Ministerios
+        </h2>
+        <p style="text-align: center; color: #999; margin-bottom: 60px">
+          SIRVIENDO CON AMOR Y DEDICACIÓN
+        </p>
+        <div class="ministries-grid">
+          <div class="ministry-card">
+            <img src="images/juvenil.jpg" alt="Ministerio de Jóvenes" />
+            <div class="ministry-overlay">
+              <h3>Ministerio de Jóvenes</h3>
+              <p>Formando una generación apasionada por Cristo</p>
+            </div>
+          </div>
+          <div class="ministry-card">
+            <img src="images/infantil.jpg" alt="Ministerio Infantil" />
+            <div class="ministry-overlay">
+              <h3>Ministerio Infantil</h3>
+              <p>Sembrando la semilla de la fe en los más pequeños</p>
+            </div>
+          </div>
+          <div class="ministry-card">
+            <img src="images/misionero.jpg" alt="Alabanza" />
+            <div class="ministry-overlay">
+              <h3>Ministerio de Misionero</h3>
+              <p>Llevando una esperanza por el mundo</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección Eventos -->
+    <section class="events" id="eventos">
+      <div class="container">
+        <h2 class="section-title" style="text-align: center; color: #1a1a1a">
+          Próximos Eventos
+        </h2>
+        <p style="text-align: center; color: #999; margin-bottom: 60px">
+          NO TE PIERDAS LO QUE DIOS HARÁ
+        </p>
+        <div class="events-grid">
+          <div class="event-card">
+            <div class="event-date">
+              <span class="day">28</span>
+              <span class="month">Jun</span>
+            </div>
+            <div class="event-info">
+              <h3>Conferencia para Damas</h3>
+              <p>
+                Hay batallas que parecen imposibles, pero Dios nunca ha perdido
+                una guerra. Ven y recibe una palabra que renovará tu esperanza y
+                te recordará que la victoria pertenece al Señor..
+              </p>
+              <p class="time"><i class="far fa-clock"></i> 6:00 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <!-- Sección Contacto -->
+    <section class="contact" id="contacto">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-info">
+            <h2>Contáctanos</h2>
+            <p>
+              Estaremos encantados de recibirte y responder cualquier inquietud.
+              Dios te bendiga.
+            </p>
+            <div class="contact-detail">
+              <i class="fas fa-map-marker-alt"></i>
+              <span>Calle colinas del Sur 3212, Fracc. Colina sur</span>
+            </div>
+            <div class="contact-detail">
+              <i class="fas fa-phone"></i>
+              <span>+52 (656) 466-8183</span>
+            </div>
+            <div class="contact-detail">
+              <i class="fas fa-envelope"></i>
+              <span>casadelreydereyesad@gmail.com</span>
+            </div>
+
+            <!-- Botones de contacto rápido -->
+            <div class="quick-contact-buttons">
+              <a
+                href="https://wa.me/521234567890?text=Hola%20Iglesia%20Casa%20del%20Rey%20de%20Reyes,%20me%20gustaría%20recibir%20más%20información."
+                class="btn-whatsapp"
+                target="_blank"
+              >
+                <i class="fab fa-whatsapp"></i>
+                Enviar WhatsApp
+              </a>
+
+              <a
+                href="mailto:info@casadelrey.org?subject=Consulta%20desde%20la%20web&body=Hola%20Iglesia%20Casa%20del%20Rey%20de%20Reyes,%20me%20gustaría%20saber%20sobre:"
+                class="btn-email"
+              >
+                <i class="fas fa-envelope"></i>
+                Enviar Email
+              </a>
+            </div>
+          </div>
+
+          <form class="contact-form" id="contactForm">
+            <input
+              type="text"
+              id="nombre"
+              placeholder="Nombre completo"
+              required
+            />
+            <input
+              type="email"
+              id="email"
+              placeholder="Correo electrónico"
+              required
+            />
+            <input type="tel" id="telefono" placeholder="Teléfono" />
+            <textarea id="mensaje" placeholder="Tu mensaje"></textarea>
+
+            <div class="form-buttons">
+              <button
+                type="button"
+                class="btn-send-whatsapp"
+                onclick="enviarWhatsApp()"
+              >
+                <i class="fab fa-whatsapp"></i>
+                Enviar por WhatsApp
+              </button>
+
+              <button
+                type="button"
+                class="btn-send-email"
+                onclick="enviarEmail()"
+              >
+                <i class="fas fa-envelope"></i>
+                Enviar por Email
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      /* Estilos adicionales para los botones de contacto */
+      .quick-contact-buttons {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+        flex-wrap: wrap;
+      }
+
+      .btn-whatsapp,
+      .btn-email {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 25px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s;
+        border: 2px solid transparent;
+      }
+
+      .btn-whatsapp {
+        background: #25d366;
+        color: white;
+        border-color: #25d366;
+      }
+
+      .btn-whatsapp:hover {
+        background: transparent;
+        color: #25d366;
+        border-color: #25d366;
+      }
+
+      .btn-email {
+        background: #d4af37;
+        color: white;
+        border-color: #d4af37;
+      }
+
+      .btn-email:hover {
+        background: transparent;
+        color: #d4af37;
+        border-color: #d4af37;
+      }
+
+      /* Estilos para los botones del formulario */
+      .form-buttons {
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+      }
+
+      .btn-send-whatsapp,
+      .btn-send-email {
+        flex: 1;
+        min-width: 200px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 15px 30px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: 2px solid transparent;
+        font-family: "Montserrat", sans-serif;
+      }
+
+      .btn-send-whatsapp {
+        background: #25d366;
+        color: white;
+        border-color: #25d366;
+      }
+
+      .btn-send-whatsapp:hover {
+        background: #128c7e;
+        border-color: #128c7e;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+      }
+
+      .btn-send-email {
+        background: #d4af37;
+        color: white;
+        border-color: #d4af37;
+      }
+
+      .btn-send-email:hover {
+        background: #b8960f;
+        border-color: #b8960f;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .form-buttons {
+          flex-direction: column;
+        }
+
+        .btn-send-whatsapp,
+        .btn-send-email {
+          min-width: 100%;
+        }
+
+        .quick-contact-buttons {
+          flex-direction: column;
+        }
+
+        .btn-whatsapp,
+        .btn-email {
+          justify-content: center;
+        }
+      }
+    </style>
+
+    <script>
+      function enviarWhatsApp() {
+        // Obtener los valores del formulario
+        const nombre = document.getElementById("nombre").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const telefono = document.getElementById("telefono").value.trim();
+        const mensaje = document.getElementById("mensaje").value.trim();
+
+        // Validar campos requeridos
+        if (!nombre || !email) {
+          alert("Por favor completa al menos tu nombre y correo electrónico.");
+          return;
+        }
+
+        // Número de WhatsApp (CAMBIA ESTE NÚMERO POR EL REAL)
+        // Formato: 521234567890 (52 es código de México, luego 10 dígitos)
+        const numeroWhatsApp = "6564668183";
+
+        // Construir el mensaje
+        let textoMensaje = `Hola Iglesia Casa del Rey de Reyes,%0A%0A`;
+        textoMensaje += `*Nombre:* ${nombre}%0A`;
+        textoMensaje += `*Email:* ${email}%0A`;
+
+        if (telefono) {
+          textoMensaje += `*Teléfono:* ${telefono}%0A`;
+        }
+
+        if (mensaje) {
+          textoMensaje += `*Mensaje:* ${mensaje}%0A`;
+        }
+
+        textoMensaje += `%0A_Dios les bendiga_`;
+
+        // Crear URL de WhatsApp
+        const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${textoMensaje}`;
+
+        // Abrir en nueva ventana
+        window.open(urlWhatsApp, "_blank");
+      }
+
+      function enviarEmail() {
+        // Obtener los valores del formulario
+        const nombre = document.getElementById("nombre").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const telefono = document.getElementById("telefono").value.trim();
+        const mensaje = document.getElementById("mensaje").value.trim();
+
+        // Validar campos requeridos
+        if (!nombre || !email) {
+          alert("Por favor completa al menos tu nombre y correo electrónico.");
+          return;
+        }
+
+        // Dirección de email (CAMBIA ESTE EMAIL POR EL REAL)
+        const emailDestino = "casadelreydereyesad@gmail.com";
+
+        // Construir el asunto y cuerpo del email
+        const asunto = `Consulta desde la web - ${nombre}`;
+
+        let cuerpoEmail = `Hola Iglesia Casa del Rey de Reyes,%0D%0A%0D%0A`;
+        cuerpoEmail += `Nombre: ${nombre}%0D%0A`;
+        cuerpoEmail += `Email: ${email}%0D%0A`;
+
+        if (telefono) {
+          cuerpoEmail += `Teléfono: ${telefono}%0D%0A`;
+        }
+
+        if (mensaje) {
+          cuerpoEmail += `%0D%0AMensaje:%0D%0A${mensaje}%0D%0A`;
+        }
+
+        cuerpoEmail += `%0D%0ADios les bendiga.`;
+
+        // Crear URL mailto
+        const urlEmail = `mailto:${emailDestino}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpoEmail)}`;
+
+        // Abrir cliente de correo
+        window.location.href = urlEmail;
+      }
+    </script>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+          <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p>
+          &copy; 2024 Iglesia Casa del Rey de Reyes. Todos los derechos
+          reservados.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const hamburger = document.getElementById("hamburger");
+      const navMenu = document.getElementById("navMenu");
+      const navbar = document.getElementById("navbar");
+
+      // Menú móvil
+      hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+        const icon = hamburger.querySelector("i");
+        if (navMenu.classList.contains("active")) {
+          icon.classList.remove("fa-bars");
+          icon.classList.add("fa-times");
+        } else {
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+        }
+      });
+
+      // Cerrar menú al hacer clic en un enlace
+      document.querySelectorAll(".nav-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navMenu.classList.remove("active");
+          const icon = hamburger.querySelector("i");
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
+        });
+      });
+
+      // Efecto scroll en navbar
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
+        }
+      });
+
+      // Smooth scroll para todos los enlaces
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            const offsetTop = target.offsetTop - 80;
+            window.scrollTo({
+              top: offsetTop,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
